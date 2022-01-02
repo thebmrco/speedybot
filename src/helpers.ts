@@ -381,12 +381,20 @@ export class $Botutils {
 		}
 	}
 
-	public async sendDataAsFile<T=any>(data: T, extensionOrFileName: string, fallbackText=' ') {
+	public async sendDataAsFile<T=any>(data: T, extensionOrFileName: string, fallbackText=' ',roomId?: string,parentId?: string) {
 		const fullFileName = this.handleExt(extensionOrFileName)
 
 		const formData = new FormData();
 		formData.append('files', data, fullFileName)
+		if(roomId!=undefined){
+			formData.append('roomId', roomId)
+
+	}else{
 		formData.append('roomId', this.botRef.room.id)
+
+	}
+	if(parentId!=undefined)		formData.append('parentId', parentId);
+	
 		formData.append('text', fallbackText)
 		const formDataHeaders = formData.getHeaders()
 		const headers = {
