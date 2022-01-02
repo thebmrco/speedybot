@@ -12,7 +12,7 @@
         "start": "ts-node src/launcher",
         "start:dist": "npm run setup && cd dist && node src/launcher",
         "build:global": "tsc",
-        "build": "./node_modules/typescript/bin/tsc",
+        "build": "tsc",
         "setup": "npm i && npm run build"
     },
     "keywords": [
