@@ -1,0 +1,11 @@
+export declare function log(...payload: any[]): void;
+export declare function warning(...payload: any[]): void;
+export declare function bad(...payload: any[]): void;
+export declare function good(...payload: any[]): void;
+export declare function color(color?: string, ...payload: any[]): void;
+export declare function red(...payload: any[]): void;
+export declare function loud(...payload: any[]): void;
+export declare function askQuestion(question: string): Promise<string>;
+export declare function yesNo(question: any): Promise<boolean>;
+export declare const ascii_art: (colorChoice?: string | undefined) => void;
+export declare const help: () => void;

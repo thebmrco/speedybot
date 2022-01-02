@@ -1,0 +1,10 @@
+export { Speedybot, SpeedybotWebhook, Speedytunnel, Launch } from './speedybot';
+export { SpeedybotConfig } from './speedybot';
+export { FrameworkInst, BotHandler, WebhookHandler, Message, ToMessage, BotInst, Trigger, passThru } from './framework';
+export { bad, help, ascii_art, log, good, askQuestion, loud } from './logger';
+export { fillTemplate, pickRandom, snippet, Storage, Locker, $ } from './helpers';
+export { Chip, ChipPayload, ChipConfig } from './helpers';
+export { SpeedyCard } from './cards';
+export declare const placeholder = "__REPLACE__ME__";
+export declare const chipLabel = "___$CHIPS";
+export declare const chipConfigLabel: string;
