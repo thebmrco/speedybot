@@ -30,7 +30,7 @@ export declare class Speedybot {
     WebhookKeyword: string;
     constructor(config: SpeedybotConfig);
     send(payload: ToMessage): void;
-    sendCardToRoom(roomId: any, cardPayload: any, fallbackText?: string): void;
+    sendCardToRoom(roomId: any, cardPayload: any, fallbackText?: string, parentId?: string): void;
     sendCardToPerson(email: any, cardPayload: any, fallbackText?: string): void;
     start(): Promise<FrameworkInst>;
     addHandler(botHandler: BotHandler): void;

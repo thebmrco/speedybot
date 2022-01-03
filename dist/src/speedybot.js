@@ -88,18 +88,34 @@ var Speedybot = /** @class */ (function () {
     // Send card is a bit tricky in the <@webhook> case since we don't have any
     // existing room binding
     // For now, just make 2 different methods
-    Speedybot.prototype.sendCardToRoom = function (roomId, cardPayload, fallbackText) {
+    Speedybot.prototype.sendCardToRoom = function (roomId, cardPayload, fallbackText, parentId) {
         if (fallbackText === void 0) { fallbackText = "Your client does not appear to support rendering adaptive cards"; }
-        var card = {
-            roomId: roomId,
-            markdown: fallbackText,
-            attachments: [
-                {
-                    contentType: "application/vnd.microsoft.card.adaptive",
-                    content: cardPayload,
-                },
-            ],
-        };
+        var card;
+        if (parentId != undefined) {
+            card = {
+                roomId: roomId,
+                parentId: parentId,
+                markdown: fallbackText,
+                attachments: [
+                    {
+                        contentType: "application/vnd.microsoft.card.adaptive",
+                        content: cardPayload,
+                    },
+                ],
+            };
+        }
+        else {
+            card = {
+                roomId: roomId,
+                markdown: fallbackText,
+                attachments: [
+                    {
+                        contentType: "application/vnd.microsoft.card.adaptive",
+                        content: cardPayload,
+                    },
+                ],
+            };
+        }
         this.frameworkRef.webex.messages.create(card);
     };
     Speedybot.prototype.sendCardToPerson = function (email, cardPayload, fallbackText) {

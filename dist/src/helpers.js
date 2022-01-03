@@ -694,6 +694,59 @@ var $Botutils = /** @class */ (function () {
             });
         });
     };
+    $Botutils.prototype.getChipPayload = function (chipPayload, title) {
+        if (title === void 0) { title = ''; }
+        return __awaiter(this, void 0, void 0, function () {
+            var newChips, chips, keys, writeChips, labels, card;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        newChips = [];
+                        if (Array.isArray(chipPayload)) {
+                            chipPayload.forEach(function (chip) {
+                                if (typeof chip === 'string') {
+                                    var payload = {
+                                        label: chip
+                                    };
+                                    newChips.push(payload);
+                                }
+                                var _a = chip, label = _a.label, handler = _a.handler;
+                                if (label) {
+                                    if (typeof handler === 'function') {
+                                        newChips.push({ label: label, handler: handler });
+                                    }
+                                    else {
+                                        newChips.push({ label: label });
+                                    }
+                                }
+                            });
+                        }
+                        return [4 /*yield*/, this.getData(index_1.chipLabel)];
+                    case 1:
+                        chips = (_a.sent()) || [];
+                        keys = newChips.map(function (_a) {
+                            var label = _a.label;
+                            return label;
+                        });
+                        writeChips = chips.filter(function (chip) { return !keys.includes(chip.label); }).concat(newChips);
+                        return [4 /*yield*/, this.saveData(index_1.chipLabel, writeChips)
+                            // Render chips in chat
+                        ];
+                    case 2:
+                        _a.sent();
+                        labels = newChips.map(function (_a) {
+                            var label = _a.label;
+                            return label;
+                        });
+                        card = new index_1.SpeedyCard().setChips(labels);
+                        if (title) {
+                            card.setSubtitle(title);
+                        }
+                        return [2 /*return*/, card.render()];
+                }
+            });
+        });
+    };
     $Botutils.prototype.setChipsConfig = function (config) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {

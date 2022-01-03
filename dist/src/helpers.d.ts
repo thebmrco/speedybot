@@ -1,6 +1,7 @@
 /// <reference types="node" />
 import { AxiosRequestConfig, AxiosResponse } from 'axios';
 import { BotInst, Trigger, ToMessage, Message } from './framework';
+import { EasyCardSpec } from "./cards";
 /**
 * @param list
 * Pick an item from the list
@@ -127,6 +128,7 @@ export declare class $Botutils {
     log(...payload: any[]): void;
     checkMatch(candidate: any, list: (RegExp | string)[]): boolean;
     sendChips(chipPayload: ChipPayload, title?: string): Promise<void>;
+    getChipPayload(chipPayload: ChipPayload, title?: string): Promise<EasyCardSpec>;
     setChipsConfig(config: ChipConfig): Promise<any>;
     $trigger(text: string, trigger: Trigger): Promise<void>;
     _auth(fn: Function): any;

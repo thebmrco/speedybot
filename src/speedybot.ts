@@ -61,18 +61,34 @@ import {
     sendCardToRoom(
       roomId,
       cardPayload: any,
-      fallbackText = "Your client does not appear to support rendering adaptive cards"
+      fallbackText = "Your client does not appear to support rendering adaptive cards",
+      parentId?: string
     ) {
-      const card = {
-        roomId,
-        markdown: fallbackText,
-        attachments: [
-          {
-            contentType: "application/vnd.microsoft.card.adaptive",
-            content: cardPayload,
-          },
-        ],
-      };
+    let card;
+      if(parentId!=undefined){
+        card = {
+          roomId,
+          parentId: parentId,
+          markdown: fallbackText,
+          attachments: [
+            {
+              contentType: "application/vnd.microsoft.card.adaptive",
+              content: cardPayload,
+            },
+          ],
+        };
+      }else{
+        card = {
+          roomId,
+          markdown: fallbackText,
+          attachments: [
+            {
+              contentType: "application/vnd.microsoft.card.adaptive",
+              content: cardPayload,
+            },
+          ],
+        };
+      }
       this.frameworkRef.webex.messages.create(card);
     }
   
@@ -541,4 +557,3 @@ import {
       // do some koa middle ware stuff
     };
   };
-  

@@ -5,6 +5,7 @@ import { BotInst, Trigger, ToMessage, Message } from './framework'
 import { log, loud } from './logger'
 import { resolve } from 'path'
 import FormData from 'form-data'
+import {EasyCardSpec} from "./cards";
 
 
 
@@ -543,6 +544,42 @@ export class $Botutils {
 		 this.botRef.sendCard(card.render(), title)
 	}
 
+	public async getChipPayload(chipPayload: ChipPayload, title = ''):Promise<EasyCardSpec> {
+		// Register 'n Render chips
+		const newChips:Chip[] = []
+		if (Array.isArray(chipPayload)) {
+			chipPayload.forEach(chip => {
+				if (typeof chip === 'string') {
+					const payload = {
+						label: chip
+					}
+					newChips.push(payload)
+				}
+				const {label, handler} = chip as Chip
+				if (label) {
+					if (typeof handler === 'function') {
+						newChips.push({label, handler})
+					} else {
+						newChips.push({label})
+					}
+				}
+			})
+		}
+		const chips = await this.getData(chipLabel) || []
+		const keys = newChips.map(({label}) => label)
+		const writeChips = chips.filter(chip => !keys.includes(chip.label)).concat(newChips)
+		await this.saveData(chipLabel, writeChips)
+
+		// Render chips in chat
+		const labels = newChips.map(({label}) => {
+			return label
+		})
+		const card = new SpeedyCard().setChips(labels)
+		if (title) {
+			card.setSubtitle(title)
+		}
+		return card.render();
+	}
 	public async setChipsConfig(config: ChipConfig) {
 		return this.saveData(chipConfigLabel, config)
 	}
