@@ -168,6 +168,7 @@ export interface WebexInst {
         list(options: {
             roomId: string;
             max?: number;
+            parentId?: string;
         }): Promise<Message>;
         remove(message: (Message | string | number)): Promise<unknown>;
         [key: string]: any;
