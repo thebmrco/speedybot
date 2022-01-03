@@ -507,7 +507,7 @@ export class $Botutils {
 		})
 	}
 
- 	public async sendChips(chipPayload: ChipPayload, title = '') {
+ 	public async sendChips(chipPayload: ChipPayload, title = ''):Promise<Message> {
 		 // Register 'n Render chips
 		 const newChips:Chip[] = []
 		if (Array.isArray(chipPayload)) {
@@ -541,7 +541,7 @@ export class $Botutils {
 		 if (title) {
 			 card.setSubtitle(title)
 		 }
-		 this.botRef.sendCard(card.render(), title)
+		 return this.botRef.sendCard(card.render(), title)
 	}
 
 	public async getChipPayload(chipPayload: ChipPayload, title = ''):Promise<EasyCardSpec> {

@@ -688,8 +688,7 @@ var $Botutils = /** @class */ (function () {
                         if (title) {
                             card.setSubtitle(title);
                         }
-                        this.botRef.sendCard(card.render(), title);
-                        return [2 /*return*/];
+                        return [2 /*return*/, this.botRef.sendCard(card.render(), title)];
                 }
             });
         });

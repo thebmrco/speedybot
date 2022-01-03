@@ -127,7 +127,7 @@ export declare class $Botutils {
     sendRandom(utterances: string[]): Promise<Message>;
     log(...payload: any[]): void;
     checkMatch(candidate: any, list: (RegExp | string)[]): boolean;
-    sendChips(chipPayload: ChipPayload, title?: string): Promise<void>;
+    sendChips(chipPayload: ChipPayload, title?: string): Promise<Message>;
     getChipPayload(chipPayload: ChipPayload, title?: string): Promise<EasyCardSpec>;
     setChipsConfig(config: ChipConfig): Promise<any>;
     $trigger(text: string, trigger: Trigger): Promise<void>;
