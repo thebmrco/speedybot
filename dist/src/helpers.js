@@ -495,7 +495,7 @@ var $Botutils = /** @class */ (function () {
             throw e;
         }
     };
-    $Botutils.prototype.sendDataAsFile = function (data, extensionOrFileName, fallbackText, roomId, parentId) {
+    $Botutils.prototype.sendDataAsFile = function (data, extensionOrFileName, fallbackText, roomId, personEmail, parentId) {
         if (fallbackText === void 0) { fallbackText = ' '; }
         return __awaiter(this, void 0, void 0, function () {
             var fullFileName, formData, formDataHeaders, headers;
@@ -506,8 +506,8 @@ var $Botutils = /** @class */ (function () {
                 if (roomId != undefined) {
                     formData.append('roomId', roomId);
                 }
-                else {
-                    formData.append('roomId', this.botRef.room.id);
+                if (personEmail != undefined) {
+                    formData.append('toPersonEmail', personEmail);
                 }
                 if (parentId != undefined)
                     formData.append('parentId', parentId);

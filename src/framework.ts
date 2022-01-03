@@ -182,7 +182,7 @@ export interface WebexInst {
          */
         create(message: ToMessage): Promise<Message>,
         get(message: (Message | string)): Promise<Message>,
-        list(options: {roomId: string, max?: number,parentId?: string}): Promise<Message>,
+        list(options: {roomId: string, max?: number,parentId?: string}): Promise<Message[]>,
         remove(message: (Message | string | number)): Promise<unknown>,
         [key: string]: any;
     },

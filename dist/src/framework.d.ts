@@ -169,7 +169,7 @@ export interface WebexInst {
             roomId: string;
             max?: number;
             parentId?: string;
-        }): Promise<Message>;
+        }): Promise<Message[]>;
         remove(message: (Message | string | number)): Promise<unknown>;
         [key: string]: any;
     };

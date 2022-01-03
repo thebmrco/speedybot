@@ -113,7 +113,7 @@ export declare class $Botutils {
     resolveFilePath(...filePieces: string[]): string;
     prepareLocalFile(...filePieces: string[]): import("fs").ReadStream;
     sendFile(...filePieces: string[]): void;
-    sendDataAsFile<T = any>(data: T, extensionOrFileName: string, fallbackText?: string, roomId?: string, parentId?: string): Promise<AxiosResponse<any, any>>;
+    sendDataAsFile<T = any>(data: T, extensionOrFileName: string, fallbackText?: string, roomId?: string, personEmail?: string, parentId?: string): Promise<AxiosResponse<any, any>>;
     _FSsendDataAsFile<T = any>(data: T, extensionOrFileName: string, config?: FileConfig, fallbackText?: string): Promise<void>;
     killFile(path: string): Promise<unknown>;
     sendDataFromUrl(resourceUrl: string, fallbackText?: string): Promise<Message>;
