@@ -132,6 +132,7 @@ export declare class $Botutils {
     setChipsConfig(config: ChipConfig): Promise<any>;
     $trigger(text: string, trigger: Trigger): Promise<void>;
     _auth(fn: Function): any;
+    edit<T = any>(message: string | Message, newData: string): Promise<AxiosResponse<any, any>>;
 }
 export interface FileConfig {
     type?: 'json' | 'buffer' | 'text';

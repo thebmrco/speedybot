@@ -597,6 +597,26 @@ export class $Botutils {
 	public _auth(fn: Function) {
 		return fn.call(this, this.token)
 	}
+	public async edit<T=any>(message: string | Message, newData: string) {
+		let id = message
+		let roomId = this.botRef.room.id
+
+		if (typeof message === 'object') {
+			const { id:msgId, roomId:msgRoomId } = message as Message
+			id = msgId as string
+			roomId = msgRoomId as string
+		}
+
+		const submitData = {
+			roomId,
+			markdown: newData
+		}
+		const headers = {
+			Authorization: `Bearer ${this.token}`,
+		}
+		const url = `${this.API.messages}/${id}`
+		return axios.put(url, submitData, { headers })
+	}
 }
 
 export interface FileConfig {

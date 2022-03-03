@@ -770,6 +770,29 @@ var $Botutils = /** @class */ (function () {
     $Botutils.prototype._auth = function (fn) {
         return fn.call(this, this.token);
     };
+    $Botutils.prototype.edit = function (message, newData) {
+        return __awaiter(this, void 0, void 0, function () {
+            var id, roomId, _a, msgId, msgRoomId, submitData, headers, url;
+            return __generator(this, function (_b) {
+                id = message;
+                roomId = this.botRef.room.id;
+                if (typeof message === 'object') {
+                    _a = message, msgId = _a.id, msgRoomId = _a.roomId;
+                    id = msgId;
+                    roomId = msgRoomId;
+                }
+                submitData = {
+                    roomId: roomId,
+                    markdown: newData
+                };
+                headers = {
+                    Authorization: "Bearer " + this.token,
+                };
+                url = this.API.messages + "/" + id;
+                return [2 /*return*/, axios_1.default.put(url, submitData, { headers: headers })];
+            });
+        });
+    };
     return $Botutils;
 }());
 exports.$Botutils = $Botutils;
