@@ -617,6 +617,16 @@ export class $Botutils {
 		const url = `${this.API.messages}/${id}`
 		return axios.put(url, submitData, { headers })
 	}
+	public async editFull<T=any>(message: string | Message, newData: Message) {
+		let id = message
+		
+
+		const headers = {
+			Authorization: `Bearer ${this.token}`,
+		}
+		const url = `${this.API.messages}/${id}`
+		return axios.put(url, newData, { headers })
+	}
 }
 
 export interface FileConfig {

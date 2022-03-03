@@ -793,6 +793,19 @@ var $Botutils = /** @class */ (function () {
             });
         });
     };
+    $Botutils.prototype.editFull = function (message, newData) {
+        return __awaiter(this, void 0, void 0, function () {
+            var id, headers, url;
+            return __generator(this, function (_a) {
+                id = message;
+                headers = {
+                    Authorization: "Bearer " + this.token,
+                };
+                url = this.API.messages + "/" + id;
+                return [2 /*return*/, axios_1.default.put(url, newData, { headers: headers })];
+            });
+        });
+    };
     return $Botutils;
 }());
 exports.$Botutils = $Botutils;

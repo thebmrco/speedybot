@@ -133,6 +133,7 @@ export declare class $Botutils {
     $trigger(text: string, trigger: Trigger): Promise<void>;
     _auth(fn: Function): any;
     edit<T = any>(message: string | Message, newData: string): Promise<AxiosResponse<any, any>>;
+    editFull<T = any>(message: string | Message, newData: Message): Promise<AxiosResponse<any, any>>;
 }
 export interface FileConfig {
     type?: 'json' | 'buffer' | 'text';
