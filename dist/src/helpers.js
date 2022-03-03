@@ -795,9 +795,11 @@ var $Botutils = /** @class */ (function () {
     };
     $Botutils.prototype.editFull = function (message, newData) {
         return __awaiter(this, void 0, void 0, function () {
-            var id, headers, url;
+            var id, msgId, headers, url;
             return __generator(this, function (_a) {
                 id = message;
+                msgId = message.id;
+                id = msgId;
                 headers = {
                     Authorization: "Bearer " + this.token,
                 };

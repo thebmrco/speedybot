@@ -619,8 +619,9 @@ export class $Botutils {
 	}
 	public async editFull<T=any>(message: string | Message, newData: Message) {
 		let id = message
-		
 
+		const { id:msgId} = message as Message
+		id = msgId as string
 		const headers = {
 			Authorization: `Bearer ${this.token}`,
 		}
