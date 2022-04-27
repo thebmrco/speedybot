@@ -60,7 +60,7 @@ var SpeedyCard = /** @class */ (function () {
         this.choices = choices.map(function (choice, idx) {
             return {
                 title: choice,
-                value: String(idx)
+                value: String(choice)
             };
         });
         if (config) {

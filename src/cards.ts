@@ -141,7 +141,7 @@ export class SpeedyCard {
         this.choices = choices.map((choice: string, idx) => {
 			return {
 				title: choice,
-				value: String(idx)
+				value: String(choice)
 			}
 		})
         if (config) {
