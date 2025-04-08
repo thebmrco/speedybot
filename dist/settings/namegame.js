@@ -13,9 +13,9 @@ exports.default = {
             return bot.sendCard(myCard_1.render(), 'It appears your client does not support adaptive cards');
         }
         var firstName = name ? name : trigger.person.firstName;
-        var res = exports.lyricsGenerator(firstName);
+        var res = (0, exports.lyricsGenerator)(firstName);
         var warmup = ['Alright,', 'Here we go', 'Ready?', 'Deep breath...'];
-        var output = src_1.pickRandom(warmup) + " " + res;
+        var output = "".concat((0, src_1.pickRandom)(warmup), " ").concat(res);
         var myCard = new src_1.SpeedyCard().setTitle('The Name Game by Shirley Ellis').setSubtitle(output).setUrl('https://www.youtube.com/watch?v=NeF7jqf0GU4').setImage('https://i3.ytimg.com/vi/NeF7jqf0GU4/hqdefault.jpg');
         bot.sendCard(myCard.render(), 'The Name Game by Shirley Ellis: https://www.youtube.com/watch?v=NeF7jqf0GU4');
         if (!name) {
@@ -47,18 +47,19 @@ var isBFM = function (letter) {
 var cases = function (firstLetter, remainder, fullname) {
     // Vowel case
     if (isVowel(firstLetter)) {
-        return "\n" + fullname + ", " + fullname + ", bo-" + fullname.toLowerCase() + "\nBanana-fana fo-f" + fullname.toLowerCase() + "\nFee-fi-mo-m" + fullname.toLowerCase() + "\n" + fullname + "! \t\n";
+        return "\n".concat(fullname, ", ").concat(fullname, ", bo-").concat(fullname.toLowerCase(), "\nBanana-fana fo-f").concat(fullname.toLowerCase(), "\nFee-fi-mo-m").concat(fullname.toLowerCase(), "\n").concat(fullname, "! \t\n");
     }
     // Billy/Felix/Mary case
     if (isBFM(firstLetter)) {
-        return "\n" + fullname + ", " + fullname + ", bo-" + remainder + "\nBanana-fana fo-" + remainder + "\nFee-fi-mo-m" + remainder + "\n" + fullname + "!\n";
+        return "\n".concat(fullname, ", ").concat(fullname, ", bo-").concat(remainder, "\nBanana-fana fo-").concat(remainder, "\nFee-fi-mo-m").concat(remainder, "\n").concat(fullname, "!\n");
     }
-    return "\n" + fullname + ", " + fullname + ", bo-b" + remainder + "\nBanana-fana fo-f" + remainder + "\nFee-fi-mo-m" + remainder + "\n" + fullname + "! \t\n";
+    return "\n".concat(fullname, ", ").concat(fullname, ", bo-b").concat(remainder, "\nBanana-fana fo-f").concat(remainder, "\nFee-fi-mo-m").concat(remainder, "\n").concat(fullname, "! \t\n");
 };
-exports.lyricsGenerator = function (name) {
+var lyricsGenerator = function (name) {
     if (name === void 0) { name = "Marsha"; }
     var firstLetter = name.charAt(0);
     var remainder = name.slice(1);
     return cases(firstLetter, remainder, name);
 };
+exports.lyricsGenerator = lyricsGenerator;
 //# sourceMappingURL=namegame.js.map

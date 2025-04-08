@@ -63,9 +63,8 @@ export interface BotInst {
     webex: WebexInst;
     implode(): Promise<boolean>;
     say(format: string, msg?: string | object): Promise<Message>;
-    say(object: any): Promise<Message>;
-    say({ markdown: string }: {
-        markdown: any;
+    say(options: {
+        markdown: string;
     }): Promise<Message>;
     sayWithLocalFile(message: string | object, filename: string): Promise<Message>;
     reply(replyTo: string | object, message: string | object, format?: string): Promise<Message>;
@@ -201,9 +200,9 @@ export interface Membership {
     isMonitor: boolean;
     created: string;
 }
-export declare type keywords = string | RegExp;
-export declare type Allowedkeywords = keywords | keywords[];
-export declare type handlerFunc = (bot: BotInst, trigger: Trigger) => void;
+export type keywords = string | RegExp;
+export type Allowedkeywords = keywords | keywords[];
+export type handlerFunc = (bot: BotInst, trigger: Trigger) => void;
 /**
  *
  * @member {string | RegExp | (string | RegExp)[]} keyword is used for whatever reason
@@ -221,8 +220,8 @@ export interface BotHandler {
     helpText: string;
     preference?: number;
 }
-export declare type AlertFunc = (req: any, res: any) => void;
-export declare type ValidMethods = 'POST' | 'GET' | 'PUT' | 'PATCH' | 'DELETE';
+export type AlertFunc = (req: any, res: any) => void;
+export type ValidMethods = 'POST' | 'GET' | 'PUT' | 'PATCH' | 'DELETE';
 export interface WebhookHandler {
     keyword: '<@webhook>';
     route: string;

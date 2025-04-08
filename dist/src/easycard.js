@@ -12,7 +12,7 @@
  */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CardSample = exports.easyKeyValCard = exports.easyChipCard = exports.easyCard = void 0;
-exports.easyCard = function (easyCardPayload) {
+var easyCard = function (easyCardPayload) {
     var payload = {
         "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
         "type": "AdaptiveCard",
@@ -22,14 +22,14 @@ exports.easyCard = function (easyCardPayload) {
                 "type": "TextBlock",
                 "size": "Medium",
                 "weight": "Bolder",
-                "text": "" + easyCardPayload.title
+                "text": "".concat(easyCardPayload.title)
             },
             {
                 "type": "RichTextBlock",
                 "inlines": [
                     {
                         "type": "TextRun",
-                        "text": "" + (easyCardPayload.text ? easyCardPayload.text : '')
+                        "text": "".concat(easyCardPayload.text ? easyCardPayload.text : '')
                     }
                 ]
             }
@@ -38,7 +38,7 @@ exports.easyCard = function (easyCardPayload) {
     if (easyCardPayload.image) {
         var imagePayload = {
             "type": "Image",
-            "url": "" + easyCardPayload.image,
+            "url": "".concat(easyCardPayload.image),
             "horizontalAlignment": "Center",
             "size": "large"
         };
@@ -47,8 +47,8 @@ exports.easyCard = function (easyCardPayload) {
     if (easyCardPayload.url) {
         var buttonPayload = {
             "type": "Action.OpenUrl",
-            "title": "" + (easyCardPayload.buttonLabel ? easyCardPayload.buttonLabel : 'Go'),
-            "url": "" + easyCardPayload.url,
+            "title": "".concat(easyCardPayload.buttonLabel ? easyCardPayload.buttonLabel : 'Go'),
+            "url": "".concat(easyCardPayload.url),
             "style": "positive"
         };
         payload.actions = [buttonPayload];
@@ -89,7 +89,8 @@ exports.easyCard = function (easyCardPayload) {
     }
     return payload;
 };
-exports.easyChipCard = function (config) {
+exports.easyCard = easyCard;
+var easyChipCard = function (config) {
     var payload = {
         "type": "AdaptiveCard",
         "body": [],
@@ -112,7 +113,8 @@ exports.easyChipCard = function (config) {
     }
     return payload;
 };
-exports.easyKeyValCard = function (config) {
+exports.easyChipCard = easyChipCard;
+var easyKeyValCard = function (config) {
     var payload = {
         "type": "AdaptiveCard",
         "body": [
@@ -166,6 +168,7 @@ exports.easyKeyValCard = function (config) {
     }
     return payload;
 };
+exports.easyKeyValCard = easyKeyValCard;
 // Kitchen sink example + inputs
 exports.CardSample = {
     "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",

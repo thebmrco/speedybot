@@ -36,12 +36,12 @@
         "url": "https://github.com/valgaze/speedybot.git"
     },
     "devDependencies": {
-        "@types/node": "^13.13.52",
+        "@types/node": "^22.14.0",
         "@types/tape": "^4.13.2",
         "nodemon": "^2.0.4",
         "tape": "^5.3.1",
         "ts-node": "^8.10.1",
-        "typescript": "^3.8.3",
+        "typescript": "^5.8.3",
         "webex-node-bot-framework": "^2.3.7"
     }
 }

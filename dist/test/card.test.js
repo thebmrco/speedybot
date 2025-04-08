@@ -5,10 +5,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var tape_1 = __importDefault(require("tape"));
 var src_1 = require("./../src");
-tape_1.default("setup", function (t) {
+(0, tape_1.default)("setup", function (t) {
     t.end();
 });
-tape_1.default("Sanity test", function (t) {
+(0, tape_1.default)("Sanity test", function (t) {
     var expected = {
         "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
         "type": "AdaptiveCard",
@@ -26,7 +26,7 @@ tape_1.default("Sanity test", function (t) {
     t.deepEqual(actual, expected);
     t.end();
 });
-tape_1.default("Kitchen sink", function (t) {
+(0, tape_1.default)("Kitchen sink", function (t) {
     var expected = {
         "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
         "type": "AdaptiveCard",
@@ -91,7 +91,7 @@ tape_1.default("Kitchen sink", function (t) {
     t.deepEqual(actual, expected);
     t.end();
 });
-tape_1.default("Date and Time Pickers", function (t) {
+(0, tape_1.default)("Date and Time Pickers", function (t) {
     var expected = {
         "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
         "type": "AdaptiveCard",
@@ -172,7 +172,7 @@ tape_1.default("Date and Time Pickers", function (t) {
     t.deepEqual(actual, expected);
     t.end();
 });
-tape_1.default("teardown", function (t) {
+(0, tape_1.default)("teardown", function (t) {
     t.end();
 });
 //# sourceMappingURL=card.test.js.map

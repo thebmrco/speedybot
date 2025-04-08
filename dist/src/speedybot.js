@@ -20,12 +20,12 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 var __generator = (this && this.__generator) || function (thisArg, body) {
-    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
-    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
+    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g = Object.create((typeof Iterator === "function" ? Iterator : Object).prototype);
+    return g.next = verb(0), g["throw"] = verb(1), g["return"] = verb(2), typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
     function verb(n) { return function (v) { return step([n, v]); }; }
     function step(op) {
         if (f) throw new TypeError("Generator is already executing.");
-        while (_) try {
+        while (g && (g = 0, op[0] && (_ = 0)), _) try {
             if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
             if (y = 0, t) op = [op[0] & 2, t.value];
             switch (op[0]) {
@@ -46,12 +46,14 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-var __spreadArrays = (this && this.__spreadArrays) || function () {
-    for (var s = 0, i = 0, il = arguments.length; i < il; i++) s += arguments[i].length;
-    for (var r = Array(s), k = 0, i = 0; i < il; i++)
-        for (var a = arguments[i], j = 0, jl = a.length; j < jl; j++, k++)
-            r[k] = a[j];
-    return r;
+var __spreadArray = (this && this.__spreadArray) || function (to, from, pack) {
+    if (pack || arguments.length === 2) for (var i = 0, l = from.length, ar; i < l; i++) {
+        if (ar || !(i in from)) {
+            if (!ar) ar = Array.prototype.slice.call(from, 0, i);
+            ar[i] = from[i];
+        }
+    }
+    return to.concat(ar || Array.prototype.slice.call(from));
 };
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
@@ -341,7 +343,7 @@ var Speedybot = /** @class */ (function () {
         for (var _i = 0; _i < arguments.length; _i++) {
             handlers[_i] = arguments[_i];
         }
-        return (_a = Array.prototype.concat).call.apply(_a, __spreadArrays([[]], handlers));
+        return (_a = Array.prototype.concat).call.apply(_a, __spreadArray([[]], handlers, false));
     };
     Speedybot.prototype.defaultHelpHandler = function (handlerList) {
         return {
@@ -354,7 +356,7 @@ var Speedybot = /** @class */ (function () {
                     if (keyword instanceof Array) {
                         label = keyword[0];
                     }
-                    return label + ": " + handler.helpText;
+                    return "".concat(label, ": ").concat(handler.helpText);
                 })
                     .join("\n\n");
                 var cardJSON = {
@@ -379,13 +381,13 @@ var Speedybot = /** @class */ (function () {
                         },
                     ],
                 };
-                return bot.sendCard(cardJSON, "Your client doesn't support rendering adpative cards. Help data: " + text);
+                return bot.sendCard(cardJSON, "Your client doesn't support rendering adpative cards. Help data: ".concat(text));
             },
             helpText: "Get help info",
         };
     };
     Speedybot.prototype.snippet = function (data) {
-        return helpers_1.snippet(data);
+        return (0, helpers_1.snippet)(data);
     };
     Speedybot.prototype.defaultHealthcheck = function () {
         return {
@@ -393,24 +395,24 @@ var Speedybot = /** @class */ (function () {
             handler: function (bot, trigger) {
                 // Pick a random response for healthcheck
                 var choices = [
-                    "At the tone, the time will be " + new Date(),
-                    new Date() + ", healthcheck is GOOD",
-                    "Health Status: Good (" + new Date() + ")",
+                    "At the tone, the time will be ".concat(new Date()),
+                    "".concat(new Date(), ", healthcheck is GOOD"),
+                    "Health Status: Good (".concat(new Date(), ")"),
                 ];
-                bot.say(helpers_1.pickRandom(choices));
+                bot.say((0, helpers_1.pickRandom)(choices));
                 // Adapative Card: https://developer.webex.com/docs/api/guides/cards
                 var cardPayload = new _1.SpeedyCard()
                     .setTitle("System is 👍")
                     .setSubtitle("If you see this card, everything is working")
                     .setImage("https://i.imgur.com/SW78JRd.jpg")
                     .setInput("What's on your mind?")
-                    .setUrl(helpers_1.pickRandom([
+                    .setUrl((0, helpers_1.pickRandom)([
                     "https://www.youtube.com/watch?v=3GwjfUFyY6M",
                     "https://www.youtube.com/watch?v=d-diB65scQU",
                 ]), "Take a moment to celebrate")
                     .setTable([
                     ["Bot's Date", new Date().toDateString()],
-                    ["Bot's Uptime", String(process.uptime()).substring(0, 25) + "s"],
+                    ["Bot's Uptime", "".concat(String(process.uptime()).substring(0, 25), "s")],
                 ]);
                 // const cardPayload = {
                 //     "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
@@ -456,7 +458,7 @@ var Speedybot = /** @class */ (function () {
         };
     };
     Speedybot.prototype.webhook = function () {
-        return webhook_1.default(this.frameworkRef);
+        return (0, webhook_1.default)(this.frameworkRef);
     };
     return Speedybot;
 }());
@@ -470,9 +472,9 @@ exports.Speedybot = Speedybot;
  * @param handlers: Bothandler[]
  * @returns Promise<unknown>
  */
-exports.SpeedybotWebhook = function (config, handlers, app) {
+var SpeedybotWebhook = function (config, handlers, app) {
     var _a = config.webhookUrl, webhookUrl = _a === void 0 ? "" : _a;
-    helpers_1.ValidatewebhookUrl(webhookUrl);
+    (0, helpers_1.ValidatewebhookUrl)(webhookUrl);
     if (config.token === _1.placeholder) {
         throw new Error("Placeholder detected under 'token' in config.json! See here for instructions: https://github.com/valgaze/speedybot-starter/blob/master/quickstart.md Exiting...");
     }
@@ -527,7 +529,8 @@ exports.SpeedybotWebhook = function (config, handlers, app) {
      *
      */
 };
-exports.Speedytunnel = function (app, port, tunneler, config, handlers) { return __awaiter(void 0, void 0, void 0, function () {
+exports.SpeedybotWebhook = SpeedybotWebhook;
+var Speedytunnel = function (app, port, tunneler, config, handlers) { return __awaiter(void 0, void 0, void 0, function () {
     var tunnelUrl, webhookRoute, token, _a, webhookUrl, speedyConfig;
     return __generator(this, function (_b) {
         switch (_b.label) {
@@ -537,24 +540,25 @@ exports.Speedytunnel = function (app, port, tunneler, config, handlers) { return
                 webhookRoute = "speedywebhook";
                 token = config.token, _a = config.webhookUrl, webhookUrl = _a === void 0 ? "" : _a;
                 if (webhookUrl) {
-                    console.log("WARNING: webhookUrl ('" + webhookUrl + "' detected in config, igoring and booting with tunnel " + tunnelUrl);
+                    console.log("WARNING: webhookUrl ('".concat(webhookUrl, "' detected in config, igoring and booting with tunnel ").concat(tunnelUrl));
                 }
                 speedyConfig = {
                     token: token,
-                    webhookUrl: tunnelUrl + "/" + webhookRoute,
+                    webhookUrl: "".concat(tunnelUrl, "/").concat(webhookRoute),
                 };
-                app.post("/" + webhookRoute, exports.SpeedybotWebhook(speedyConfig, handlers));
+                app.post("/".concat(webhookRoute), (0, exports.SpeedybotWebhook)(speedyConfig, handlers));
                 return [2 /*return*/];
         }
     });
 }); };
+exports.Speedytunnel = Speedytunnel;
 /**
  *
  * @param config: Speedybot Config
  * @param handlerList: list of botHandlers
  * @returns Framework instance
  */
-exports.Launch = function (config, handlerList) { return __awaiter(void 0, void 0, void 0, function () {
+var Launch = function (config, handlerList) { return __awaiter(void 0, void 0, void 0, function () {
     var speedybot, tidyHandlerList, frameworkRef;
     return __generator(this, function (_a) {
         switch (_a.label) {
@@ -562,7 +566,7 @@ exports.Launch = function (config, handlerList) { return __awaiter(void 0, void 
                 if (config.token === _1.placeholder) {
                     throw new Error("Placeholder detected in config.json! See here for instructions: https://github.com/valgaze/speedybot/blob/master/quickstart.md Exiting...");
                 }
-                _1.ascii_art();
+                (0, _1.ascii_art)();
                 speedybot = new Speedybot(config);
                 tidyHandlerList = handlerList.filter(function (_a) {
                     var keyword = _a.keyword;
@@ -576,9 +580,11 @@ exports.Launch = function (config, handlerList) { return __awaiter(void 0, void 
         }
     });
 }); };
-exports.speedybotKoa = function () {
+exports.Launch = Launch;
+var speedybotKoa = function () {
     return function (ctx) {
         // do some koa middle ware stuff
     };
 };
+exports.speedybotKoa = speedybotKoa;
 //# sourceMappingURL=speedybot.js.map

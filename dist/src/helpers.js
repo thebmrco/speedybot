@@ -20,12 +20,12 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 var __generator = (this && this.__generator) || function (thisArg, body) {
-    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
-    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
+    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g = Object.create((typeof Iterator === "function" ? Iterator : Object).prototype);
+    return g.next = verb(0), g["throw"] = verb(1), g["return"] = verb(2), typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
     function verb(n) { return function (v) { return step([n, v]); }; }
     function step(op) {
         if (f) throw new TypeError("Generator is already executing.");
-        while (_) try {
+        while (g && (g = 0, op[0] && (_ = 0)), _) try {
             if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
             if (y = 0, t) op = [op[0] & 2, t.value];
             switch (op[0]) {
@@ -61,7 +61,8 @@ var form_data_1 = __importDefault(require("form-data"));
 * @param list
 * Pick an item from the list
 **/
-exports.pickRandom = function (list) { return list[Math.floor(Math.random() * list.length)]; };
+var pickRandom = function (list) { return list[Math.floor(Math.random() * list.length)]; };
+exports.pickRandom = pickRandom;
 /**
  * Make sure webhookUrl exists and has an ending path
  * @param webhookUrl
@@ -69,7 +70,7 @@ exports.pickRandom = function (list) { return list[Math.floor(Math.random() * li
  *
  * @returns boolean | throws
  */
-exports.ValidatewebhookUrl = function (webhookUrl) {
+var ValidatewebhookUrl = function (webhookUrl) {
     // if no webhookUrl specified
     if (!webhookUrl) {
         throw new Error("Error: Missing 'webhookUrl' in config");
@@ -80,14 +81,15 @@ exports.ValidatewebhookUrl = function (webhookUrl) {
     // ex. bad: https://123-456-789.ngrok.io
     var candidate = new URL(webhookUrl);
     if (candidate.pathname === '/') {
-        logger_1.loud("\nIt looks like your config's webhookUrl does not end with a route\n\nEx. (expresjs) If your server's route handler look like this:\n\nconst config = {\n    \"webhookUrl\": \"" + webhookUrl + "\",\n    \"token\": \"aaa-bbb-ccc\"\n}\n\napp.post('my_webhook', SpeedybotWebhook(config, handlerList))\n\nChange config.webhookUrl to " + webhookUrl + (webhookUrl.slice(-1) === '/' ? 'my_webhook' : '/my_webhook') + "\n\nSee here for more details: https://github.com/valgaze/speedybot/blob/master/docs/how-to.md#deploy");
-        var errMsg = "Error: webhookUrl in should end with a path, ex " + webhookUrl + (webhookUrl.slice(-1) === '/' ? 'my_webhook' : '/my_webhook');
+        (0, logger_1.loud)("\nIt looks like your config's webhookUrl does not end with a route\n\nEx. (expresjs) If your server's route handler look like this:\n\nconst config = {\n    \"webhookUrl\": \"".concat(webhookUrl, "\",\n    \"token\": \"aaa-bbb-ccc\"\n}\n\napp.post('my_webhook', SpeedybotWebhook(config, handlerList))\n\nChange config.webhookUrl to ").concat(webhookUrl).concat(webhookUrl.slice(-1) === '/' ? 'my_webhook' : '/my_webhook', "\n\nSee here for more details: https://github.com/valgaze/speedybot/blob/master/docs/how-to.md#deploy"));
+        var errMsg = "Error: webhookUrl in should end with a path, ex ".concat(webhookUrl).concat(webhookUrl.slice(-1) === '/' ? 'my_webhook' : '/my_webhook');
         throw new Error(errMsg);
     }
     else {
         return true;
     }
 };
+exports.ValidatewebhookUrl = ValidatewebhookUrl;
 /**
  *
  * Randomly selects a phrase & fill in template
@@ -122,20 +124,20 @@ exports.ValidatewebhookUrl = function (webhookUrl) {
  *
  *
  */
-exports.fillTemplate = function (utterances, template) {
+var fillTemplate = function (utterances, template) {
     var payload;
     if (typeof utterances != "string") {
-        payload = exports.pickRandom(utterances) || "";
+        payload = (0, exports.pickRandom)(utterances) || "";
     }
     else {
         payload = utterances;
     }
     var replacer = function (utterance, target, replacement) {
-        if (!utterance.includes("$[" + target + "]")) {
+        if (!utterance.includes("$[".concat(target, "]"))) {
             return utterance;
         }
         else {
-            return replacer(utterance.replace("$[" + target + "]", replacement), target, replacement);
+            return replacer(utterance.replace("$[".concat(target, "]"), replacement), target, replacement);
         }
     };
     for (var key in template) {
@@ -144,14 +146,17 @@ exports.fillTemplate = function (utterances, template) {
     }
     return payload;
 };
-exports.snippet = function (data, dataType) {
+exports.fillTemplate = fillTemplate;
+var snippet = function (data, dataType) {
     if (dataType === void 0) { dataType = 'json'; }
-    var msg = "\n```" + dataType + "\n" + (dataType === 'json' ? JSON.stringify(data, null, 2) : data) + "\n```";
+    var msg = "\n```".concat(dataType, "\n").concat(dataType === 'json' ? JSON.stringify(data, null, 2) : data, "\n```");
     return msg;
 };
-exports.htmlSnippet = function (data) {
-    return exports.snippet(data, 'html');
+exports.snippet = snippet;
+var htmlSnippet = function (data) {
+    return (0, exports.snippet)(data, 'html');
 };
+exports.htmlSnippet = htmlSnippet;
 // Alias store/recall
 var Storage = /** @class */ (function () {
     function Storage() {
@@ -223,7 +228,7 @@ var Locker = /** @class */ (function () {
     return Locker;
 }());
 exports.Locker = Locker;
-exports.extractFileData = function (contentDisposition) {
+var extractFileData = function (contentDisposition) {
     // header >> 'content-disposition': 'attachment; filename="a.json"',      
     var fileName = contentDisposition.split(';')[1].split('=')[1].replace(/\"/g, '');
     var extension = fileName.split('.').pop() || '';
@@ -232,6 +237,7 @@ exports.extractFileData = function (contentDisposition) {
         extension: extension
     };
 };
+exports.extractFileData = extractFileData;
 var $Botutils = /** @class */ (function () {
     function $Botutils(botRef) {
         this.ContextKey = '_context_';
@@ -245,46 +251,46 @@ var $Botutils = /** @class */ (function () {
         this.request = axios_1.default;
     }
     $Botutils.prototype.snippet = function (ref) {
-        return exports.snippet(ref);
+        return (0, exports.snippet)(ref);
     };
     $Botutils.prototype.htmlSnippet = function (ref, dataType) {
         if (dataType === void 0) { dataType = 'html'; }
-        return exports.snippet(ref, dataType);
+        return (0, exports.snippet)(ref, dataType);
     };
-    $Botutils.prototype.get = function (url, config) {
-        if (config === void 0) { config = {}; }
-        return __awaiter(this, void 0, void 0, function () {
+    $Botutils.prototype.get = function (url_1) {
+        return __awaiter(this, arguments, void 0, function (url, config) {
+            if (config === void 0) { config = {}; }
             return __generator(this, function (_a) {
                 return [2 /*return*/, this.request(__assign({ url: url, method: 'GET' }, config))];
             });
         });
     };
-    $Botutils.prototype.post = function (url, config) {
-        if (config === void 0) { config = {}; }
-        return __awaiter(this, void 0, void 0, function () {
+    $Botutils.prototype.post = function (url_1) {
+        return __awaiter(this, arguments, void 0, function (url, config) {
+            if (config === void 0) { config = {}; }
             return __generator(this, function (_a) {
                 return [2 /*return*/, this.request(__assign({ url: url, method: 'POST' }, config))];
             });
         });
     };
-    $Botutils.prototype.getFile = function (fileUrl, opts) {
-        if (opts === void 0) { opts = {}; }
-        return __awaiter(this, void 0, void 0, function () {
+    $Botutils.prototype.getFile = function (fileUrl_1) {
+        return __awaiter(this, arguments, void 0, function (fileUrl, opts) {
             var requestOpts, res, headers, data, _a, fileName, extension, type, payload, e_2;
+            if (opts === void 0) { opts = {}; }
             return __generator(this, function (_b) {
                 switch (_b.label) {
                     case 0:
                         requestOpts = __assign({ method: 'GET', url: fileUrl, headers: {
-                                Authorization: "Bearer " + this.token,
+                                Authorization: "Bearer ".concat(this.token),
                             } }, opts);
                         _b.label = 1;
                     case 1:
                         _b.trys.push([1, 3, , 4]);
-                        return [4 /*yield*/, axios_1.default(requestOpts)];
+                        return [4 /*yield*/, (0, axios_1.default)(requestOpts)];
                     case 2:
                         res = _b.sent();
                         headers = res.headers, data = res.data;
-                        _a = exports.extractFileData(headers['content-disposition']), fileName = _a.fileName, extension = _a.extension;
+                        _a = (0, exports.extractFileData)(headers['content-disposition']), fileName = _a.fileName, extension = _a.extension;
                         type = headers['content-type'];
                         payload = {
                             data: data,
@@ -314,17 +320,17 @@ var $Botutils = /** @class */ (function () {
         });
     };
     $Botutils.prototype.genContextName = function (key) {
-        return this.ContextKey + "_" + key;
+        return "".concat(this.ContextKey, "_").concat(key);
     };
     $Botutils.prototype.degenContextName = function (key) {
-        return key.replace(this.ContextKey + "_", '');
+        return key.replace("".concat(this.ContextKey, "_"), '');
     };
     $Botutils.prototype.saveContext = function (key, data) {
         return __awaiter(this, void 0, void 0, function () {
             var writeData;
             return __generator(this, function (_a) {
                 writeData = data ? data : { _active: true };
-                return [2 /*return*/, this.saveData("" + this.genContextName(key), writeData)];
+                return [2 /*return*/, this.saveData("".concat(this.genContextName(key)), writeData)];
             });
         });
     };
@@ -479,7 +485,7 @@ var $Botutils = /** @class */ (function () {
             filePieces[_i] = arguments[_i];
         }
         var target = path_1.resolve.apply(void 0, filePieces);
-        var stream = fs_1.createReadStream(target);
+        var stream = (0, fs_1.createReadStream)(target);
         return stream;
     };
     $Botutils.prototype.sendFile = function () {
@@ -495,10 +501,10 @@ var $Botutils = /** @class */ (function () {
             throw e;
         }
     };
-    $Botutils.prototype.sendDataAsFile = function (data, extensionOrFileName, fallbackText, roomId, personEmail, parentId) {
-        if (fallbackText === void 0) { fallbackText = ' '; }
-        return __awaiter(this, void 0, void 0, function () {
+    $Botutils.prototype.sendDataAsFile = function (data_1, extensionOrFileName_1) {
+        return __awaiter(this, arguments, void 0, function (data, extensionOrFileName, fallbackText, roomId, personEmail, parentId) {
             var fullFileName, formData, formDataHeaders, headers;
+            if (fallbackText === void 0) { fallbackText = ' '; }
             return __generator(this, function (_a) {
                 fullFileName = this.handleExt(extensionOrFileName);
                 formData = new form_data_1.default();
@@ -513,16 +519,16 @@ var $Botutils = /** @class */ (function () {
                     formData.append('parentId', parentId);
                 formData.append('text', fallbackText);
                 formDataHeaders = formData.getHeaders();
-                headers = __assign(__assign({}, formDataHeaders), { Authorization: "Bearer " + this.token });
+                headers = __assign(__assign({}, formDataHeaders), { Authorization: "Bearer ".concat(this.token) });
                 return [2 /*return*/, axios_1.default.post(this.API.messages, formData, { headers: headers })];
             });
         });
     };
-    $Botutils.prototype._FSsendDataAsFile = function (data, extensionOrFileName, config, fallbackText) {
-        if (config === void 0) { config = {}; }
-        if (fallbackText === void 0) { fallbackText = ' '; }
-        return __awaiter(this, void 0, void 0, function () {
+    $Botutils.prototype._FSsendDataAsFile = function (data_1, extensionOrFileName_1) {
+        return __awaiter(this, arguments, void 0, function (data, extensionOrFileName, config, fallbackText) {
             var fullFileName, stream, e_5;
+            if (config === void 0) { config = {}; }
+            if (fallbackText === void 0) { fallbackText = ' '; }
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -530,8 +536,8 @@ var $Botutils = /** @class */ (function () {
                         _a.label = 1;
                     case 1:
                         _a.trys.push([1, 3, , 4]);
-                        fs_1.writeFileSync(fullFileName, data);
-                        stream = fs_1.createReadStream(fullFileName);
+                        (0, fs_1.writeFileSync)(fullFileName, data);
+                        stream = (0, fs_1.createReadStream)(fullFileName);
                         return [4 /*yield*/, this.botRef.webex.messages.create({ roomId: this.botRef.room.id, files: [stream], text: fallbackText })];
                     case 2:
                         _a.sent();
@@ -547,7 +553,7 @@ var $Botutils = /** @class */ (function () {
     };
     $Botutils.prototype.killFile = function (path) {
         return new Promise(function (resolve, reject) {
-            fs_1.unlink(path, function (err) {
+            (0, fs_1.unlink)(path, function (err) {
                 if (err) {
                     resolve(err);
                 }
@@ -557,20 +563,20 @@ var $Botutils = /** @class */ (function () {
             });
         });
     };
-    $Botutils.prototype.sendDataFromUrl = function (resourceUrl, fallbackText) {
-        if (fallbackText === void 0) { fallbackText = ' '; }
-        return __awaiter(this, void 0, void 0, function () {
+    $Botutils.prototype.sendDataFromUrl = function (resourceUrl_1) {
+        return __awaiter(this, arguments, void 0, function (resourceUrl, fallbackText) {
+            if (fallbackText === void 0) { fallbackText = ' '; }
             return __generator(this, function (_a) {
                 return [2 /*return*/, this.botRef.webex.messages.create({ roomId: this.botRef.room.id, files: [resourceUrl], text: fallbackText })];
             });
         });
     };
-    $Botutils.prototype.sendSnippet = function (data, label, dataType, fallbackText) {
-        if (label === void 0) { label = ''; }
-        if (dataType === void 0) { dataType = 'json'; }
-        if (fallbackText === void 0) { fallbackText = 'It appears your client does not support markdown'; }
-        return __awaiter(this, void 0, void 0, function () {
+    $Botutils.prototype.sendSnippet = function (data_1) {
+        return __awaiter(this, arguments, void 0, function (data, label, dataType, fallbackText) {
             var markdown;
+            if (label === void 0) { label = ''; }
+            if (dataType === void 0) { dataType = 'json'; }
+            if (fallbackText === void 0) { fallbackText = 'It appears your client does not support markdown'; }
             return __generator(this, function (_a) {
                 if (dataType === 'json') {
                     markdown = this.snippet(data);
@@ -592,7 +598,7 @@ var $Botutils = /** @class */ (function () {
         if (hasDot) {
             if (!prefix || prefix === '*') {
                 // '.json' case, generate prefix
-                fileName = this.generateFileName() + "." + ext;
+                fileName = "".concat(this.generateFileName(), ".").concat(ext);
             }
             else {
                 // 'a.json' case, pass through
@@ -601,23 +607,23 @@ var $Botutils = /** @class */ (function () {
         }
         else {
             // 'json' case, generate prefix, add .
-            fileName = this.generateFileName() + "." + prefix;
+            fileName = "".concat(this.generateFileName(), ".").concat(prefix);
         }
         return fileName;
     };
     $Botutils.prototype.generateFileName = function () {
-        return this.rando() + "_" + this.rando();
+        return "".concat(this.rando(), "_").concat(this.rando());
     };
     $Botutils.prototype.rando = function () {
-        return "" + Math.random().toString(36).slice(2);
+        return "".concat(Math.random().toString(36).slice(2));
     };
     // Alias to other helpers
     $Botutils.prototype.sendTemplate = function (utterances, template) {
-        var res = exports.fillTemplate(utterances, template);
+        var res = (0, exports.fillTemplate)(utterances, template);
         return this.botRef.webex.messages.create({ roomId: this.botRef.room.id, text: res });
     };
     $Botutils.prototype.sendRandom = function (utterances) {
-        var res = exports.pickRandom(utterances);
+        var res = (0, exports.pickRandom)(utterances);
         return this.botRef.webex.messages.create({ roomId: this.botRef.room.id, text: res });
     };
     $Botutils.prototype.log = function () {
@@ -640,10 +646,10 @@ var $Botutils = /** @class */ (function () {
             }
         });
     };
-    $Botutils.prototype.sendChips = function (chipPayload, title) {
-        if (title === void 0) { title = ''; }
-        return __awaiter(this, void 0, void 0, function () {
+    $Botutils.prototype.sendChips = function (chipPayload_1) {
+        return __awaiter(this, arguments, void 0, function (chipPayload, title) {
             var newChips, chips, keys, writeChips, labels, card;
+            if (title === void 0) { title = ''; }
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -693,10 +699,10 @@ var $Botutils = /** @class */ (function () {
             });
         });
     };
-    $Botutils.prototype.getChipPayload = function (chipPayload, title) {
-        if (title === void 0) { title = ''; }
-        return __awaiter(this, void 0, void 0, function () {
+    $Botutils.prototype.getChipPayload = function (chipPayload_1) {
+        return __awaiter(this, arguments, void 0, function (chipPayload, title) {
             var newChips, chips, keys, writeChips, labels, card;
+            if (title === void 0) { title = ''; }
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -786,9 +792,9 @@ var $Botutils = /** @class */ (function () {
                     markdown: newData
                 };
                 headers = {
-                    Authorization: "Bearer " + this.token,
+                    Authorization: "Bearer ".concat(this.token),
                 };
-                url = this.API.messages + "/" + id;
+                url = "".concat(this.API.messages, "/").concat(id);
                 return [2 /*return*/, axios_1.default.put(url, submitData, { headers: headers })];
             });
         });
@@ -801,9 +807,9 @@ var $Botutils = /** @class */ (function () {
                 msgId = message.id;
                 id = msgId;
                 headers = {
-                    Authorization: "Bearer " + this.token,
+                    Authorization: "Bearer ".concat(this.token),
                 };
-                url = this.API.messages + "/" + id;
+                url = "".concat(this.API.messages, "/").concat(id);
                 return [2 /*return*/, axios_1.default.put(url, newData, { headers: headers })];
             });
         });
@@ -811,8 +817,9 @@ var $Botutils = /** @class */ (function () {
     return $Botutils;
 }());
 exports.$Botutils = $Botutils;
-exports.$ = function (botRef) {
+var $ = function (botRef) {
     // memo?
     return new $Botutils(botRef);
 };
+exports.$ = $;
 //# sourceMappingURL=helpers.js.map

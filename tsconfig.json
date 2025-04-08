@@ -4,6 +4,7 @@
     "resolveJsonModule": true,
     "module": "commonjs",
     "esModuleInterop": true,
+    "useUnknownInCatchVariables": false,
     "target": "es5",
     "noImplicitAny": false,
     "moduleResolution": "node",

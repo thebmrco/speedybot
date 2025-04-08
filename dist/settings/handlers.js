@@ -9,12 +9,12 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 var __generator = (this && this.__generator) || function (thisArg, body) {
-    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
-    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
+    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g = Object.create((typeof Iterator === "function" ? Iterator : Object).prototype);
+    return g.next = verb(0), g["throw"] = verb(1), g["return"] = verb(2), typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
     function verb(n) { return function (v) { return step([n, v]); }; }
     function step(op) {
         if (f) throw new TypeError("Generator is already executing.");
-        while (_) try {
+        while (g && (g = 0, op[0] && (_ = 0)), _) try {
             if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
             if (y = 0, t) op = [op[0] & 2, t.value];
             switch (op[0]) {
@@ -61,7 +61,7 @@ var handlers = [
     {
         keyword: ['hello', 'hey', 'yo', 'watsup', 'hola'],
         handler: function (bot, trigger) {
-            var reply = "Heya how's it going " + trigger.person.displayName + "?";
+            var reply = "Heya how's it going ".concat(trigger.person.displayName, "?");
             bot.say(reply);
         },
         helpText: "A handler that greets the user"
@@ -100,7 +100,7 @@ var handlers = [
         keyword: '<@submit>',
         handler: function (bot, trigger) {
             // Ex. From here data could be transmitted to another service or a 3rd-party integrationn
-            bot.say("Submission received! You sent us " + JSON.stringify(trigger.attachmentAction.inputs));
+            bot.say("Submission received! You sent us ".concat(JSON.stringify(trigger.attachmentAction.inputs)));
         },
         helpText: "A special handler that fires anytime a user submits data (you can only trigger this handler by tapping Submit in a card)"
     },
@@ -114,17 +114,17 @@ var handlers = [
                         case 0:
                             supportedFiles = ['json', 'txt', 'csv'];
                             file = trigger.message.files[0];
-                            return [4 /*yield*/, src_1.$(bot).getFile(file)];
+                            return [4 /*yield*/, (0, src_1.$)(bot).getFile(file)];
                         case 1:
                             fileData = _a.sent();
                             extension = fileData.extension;
                             if (supportedFiles.includes(extension)) {
                                 data = fileData.data;
                                 // bot.snippet will format json or text data into markdown format
-                                bot.say({ markdown: src_1.$(bot).snippet(data) });
+                                bot.say({ markdown: (0, src_1.$)(bot).snippet(data) });
                             }
                             else {
-                                bot.say("Sorry, somebody needs to add support to handle *." + extension + " files");
+                                bot.say("Sorry, somebody needs to add support to handle *.".concat(extension, " files"));
                             }
                             return [2 /*return*/];
                     }
@@ -133,7 +133,7 @@ var handlers = [
         },
         helpText: 'A special handler that will activate whenever a file is uploaded'
     },
-    namegame_1.default,
+    namegame_1.default, // You can also include single-file handlers in your list
 ];
 exports.default = handlers;
 //# sourceMappingURL=handlers.js.map

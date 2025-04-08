@@ -74,7 +74,7 @@ export interface miniNgrok {
     port?: string | number;
     addr?: string | number;
 }
-export declare type tunnlerFunc = (config: miniNgrok) => Promise<string>;
+export type tunnlerFunc = (config: miniNgrok) => Promise<string>;
 export declare const Speedytunnel: (app: any, port: string | number, tunneler: tunnlerFunc, config: SpeedybotConfig, handlers: BotHandler[]) => Promise<void>;
 /**
  *

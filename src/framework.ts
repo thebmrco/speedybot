@@ -68,8 +68,7 @@ export interface BotInst {
     // methods
     implode(): Promise<boolean>;
     say(format:string, msg?: string | object): Promise<Message>
-    say(object): Promise<Message>
-    say({markdown: string}): Promise<Message>
+    say(options: { markdown: string }): Promise<Message>
     sayWithLocalFile(message: string | object, filename: string): Promise<Message>
     reply(replyTo: string | object, message: string | object, format?: string): Promise<Message>
 	dm(person: string, format: string | object, ...rest: any): void;

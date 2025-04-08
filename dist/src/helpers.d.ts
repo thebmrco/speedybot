@@ -1,4 +1,3 @@
-/// <reference types="node" />
 import { AxiosRequestConfig, AxiosResponse } from 'axios';
 import { BotInst, Trigger, ToMessage, Message } from './framework';
 import { EasyCardSpec } from "./cards";
@@ -114,7 +113,7 @@ export declare class $Botutils {
     prepareLocalFile(...filePieces: string[]): import("fs").ReadStream;
     sendFile(...filePieces: string[]): void;
     sendDataAsFile<T = any>(data: T, extensionOrFileName: string, fallbackText?: string, roomId?: string, personEmail?: string, parentId?: string): Promise<AxiosResponse<any, any>>;
-    _FSsendDataAsFile<T = any>(data: T, extensionOrFileName: string, config?: FileConfig, fallbackText?: string): Promise<void>;
+    _FSsendDataAsFile<T extends string | NodeJS.ArrayBufferView>(data: T, extensionOrFileName: string, config?: FileConfig, fallbackText?: string): Promise<void>;
     killFile(path: string): Promise<unknown>;
     sendDataFromUrl(resourceUrl: string, fallbackText?: string): Promise<Message>;
     sendSnippet(data: string | object, label?: string, dataType?: string, fallbackText?: string): Promise<Message>;
@@ -143,7 +142,7 @@ export interface Chip {
     label: string;
     handler?: (bot: BotInst, trigger: Trigger) => void;
 }
-export declare type ChipPayload = string[] | Chip[] | (string | Chip)[];
+export type ChipPayload = string[] | Chip[] | (string | Chip)[];
 export interface ChipConfig {
     disappearOnTap?: boolean;
 }

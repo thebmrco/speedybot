@@ -221,7 +221,7 @@ var SpeedyCard = /** @class */ (function () {
         }
         else {
             if (this.attachedData && Object.keys(this.attachedData).length) {
-                index_1.bad("attachedData ignore, you must call at least either .setInput(), .setChoices, .setDate, .setTime, to pass through data with an adaptive card");
+                (0, index_1.bad)("attachedData ignore, you must call at least either .setInput(), .setChoices, .setDate, .setTime, to pass through data with an adaptive card");
             }
         }
         if (this.url) {

@@ -7,4 +7,4 @@ export { Chip, ChipPayload, ChipConfig } from './helpers';
 export { SpeedyCard } from './cards';
 export declare const placeholder = "__REPLACE__ME__";
 export declare const chipLabel = "___$CHIPS";
-export declare const chipConfigLabel: string;
+export declare const chipConfigLabel = "___$CHIPS_$config";

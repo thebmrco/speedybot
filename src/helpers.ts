@@ -406,7 +406,7 @@ export class $Botutils {
 		return axios.post(this.API.messages, formData, { headers })
 	}
 
-	public async _FSsendDataAsFile<T=any>(data: T, extensionOrFileName: string, config: FileConfig ={}, fallbackText=' ') {
+	public async _FSsendDataAsFile<T extends string | NodeJS.ArrayBufferView>(data: T, extensionOrFileName: string, config: FileConfig ={}, fallbackText=' ') {
 		// 🦆: HACK HACK HACK for "files": https://developer.webex.com/docs/basics
 		// todo: get rid of filesystem write
 		const fullFileName = this.handleExt(extensionOrFileName)

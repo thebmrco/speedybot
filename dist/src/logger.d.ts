@@ -7,5 +7,5 @@ export declare function red(...payload: any[]): void;
 export declare function loud(...payload: any[]): void;
 export declare function askQuestion(question: string): Promise<string>;
 export declare function yesNo(question: any): Promise<boolean>;
-export declare const ascii_art: (colorChoice?: string | undefined) => void;
+export declare const ascii_art: (colorChoice?: string) => void;
 export declare const help: () => void;

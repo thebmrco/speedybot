@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.chipConfigLabel = exports.chipLabel = exports.placeholder = void 0;
+exports.chipConfigLabel = exports.chipLabel = exports.placeholder = exports.SpeedyCard = exports.$ = exports.Locker = exports.Storage = exports.snippet = exports.pickRandom = exports.fillTemplate = exports.loud = exports.askQuestion = exports.good = exports.log = exports.ascii_art = exports.help = exports.bad = exports.passThru = exports.Launch = exports.Speedytunnel = exports.SpeedybotWebhook = exports.Speedybot = void 0;
 var speedybot_1 = require("./speedybot");
 Object.defineProperty(exports, "Speedybot", { enumerable: true, get: function () { return speedybot_1.Speedybot; } });
 Object.defineProperty(exports, "SpeedybotWebhook", { enumerable: true, get: function () { return speedybot_1.SpeedybotWebhook; } });
@@ -30,5 +30,5 @@ var cards_1 = require("./cards");
 Object.defineProperty(exports, "SpeedyCard", { enumerable: true, get: function () { return cards_1.SpeedyCard; } });
 exports.placeholder = '__REPLACE__ME__';
 exports.chipLabel = '___$CHIPS';
-exports.chipConfigLabel = exports.chipLabel + "_$config";
+exports.chipConfigLabel = "".concat(exports.chipLabel, "_$config");
 //# sourceMappingURL=index.js.map
